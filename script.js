@@ -10,7 +10,7 @@ function writePassword() {
 }
 
 function generatePassword() {
-  getLength()
+  var passwordLength = getLength()
 
   var hasLowerCase = confirm("Do you want lowercase Characters?");
   var hasUpperCase = confirm("Do you want uppercase Characters?");
@@ -22,36 +22,38 @@ function generatePassword() {
   var numericCharacters = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
   var specialCharacters = ["@","%","+","/",",", "!","#","$","^","?",":",",",")","(","}","{", "]","[","~","-","_",".",]
   
-  let pass = lowerCasedCharacters
+  let pass = []
 
-  if (hasUpperCase) pass = lowerCasedCharacters.concat(upperCasedCharacters)
-  if (hasNumbers) pass = lowerCasedCharacters.concat(numericCharacters)
-  if (hasSpecial) pass = lowerCasedCharacters.concat(specialCharacters)
+  if (hasLowerCase) pass = pass.concat(lowerCasedCharacters)
+  if (hasUpperCase) pass = pass.concat(upperCasedCharacters)
+  if (hasNumbers) pass = pass.concat(numericCharacters)
+  if (hasSpecial) pass = pass.concat(specialCharacters)
   
   var passwordInfo = []
   for (let i = 0; i < passwordLength; i++) {
-    passwordInfo.push(Math.floor(Math.random) * pass.length)
+    passwordInfo.push(pass[Math.floor(Math.random() * pass.length)])
     }
-  console.log(passwordInfo.join(''))
-  return password
+
+  return passwordInfo.join('')
 }
 
 // var pLength = hasNumbers.value
 
 // Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
+generateBtn.addEventListener("click", writePassword)
+
+
 function getLength() {
-  const passwordLength = parseInt(
+  var passwordLength = parseInt(
     prompt(
       "Enter the length of requested Password between 8 and 128 characters"
       )
       );
       
       if (passwordLength >= 8 && passwordLength <= 128) {
-        return
+        return passwordLength
       } else {
-        getLength();
+        return getLength();
       }
     }
     
-    console.log(passwordLength)
